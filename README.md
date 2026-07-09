@@ -13,7 +13,7 @@ Proyek ini adalah contoh implementasi REST API sederhana menggunakan bahasa pemr
 
 ## Prasyarat
 
-- Go 1.18 atau lebih baru.
+- Go 1.25 atau lebih baru.
 - PostgreSQL berjalan di sistem Anda.
 
 ## Konfigurasi Database
@@ -81,5 +81,84 @@ Server akan berjalan secara default di port 3000 (`http://localhost:3000`).
   ```json
   {
       "error": "Nama dan Lokasi tidak boleh kosong"
+  }
+  ```
+
+### Mengambil Semua Bioskop
+
+- **URL:** `/bioskop`
+- **Method:** `GET`
+- **Response Sukses (200 OK):**
+  ```json
+  [
+      {
+          "id": 1,
+          "nama": "Bioskop XXI",
+          "lokasi": "Jakarta",
+          "rating": 4.5
+      }
+  ]
+  ```
+
+### Mengambil Bioskop Berdasarkan ID
+
+- **URL:** `/bioskop/:id`
+- **Method:** `GET`
+- **Response Sukses (200 OK):**
+  ```json
+  {
+      "id": 1,
+      "nama": "Bioskop XXI",
+      "lokasi": "Jakarta",
+      "rating": 4.5
+  }
+  ```
+- **Response Error (404 Not Found):**
+  ```json
+  {
+      "error": "Bioskop tidak ditemukan"
+  }
+  ```
+
+### Memperbarui Bioskop
+
+- **URL:** `/bioskop/:id`
+- **Method:** `PUT`
+- **Header:** `Content-Type: application/json`
+- **Body Request:**
+  ```json
+  {
+      "nama": "Bioskop CGV",
+      "lokasi": "Bandung",
+      "rating": 4.8
+  }
+  ```
+- **Response Sukses (200 OK):**
+  ```json
+  {
+      "message": "Bioskop berhasil diperbarui"
+  }
+  ```
+- **Response Error (404 Not Found):**
+  ```json
+  {
+      "error": "Bioskop tidak ditemukan"
+  }
+  ```
+
+### Menghapus Bioskop
+
+- **URL:** `/bioskop/:id`
+- **Method:** `DELETE`
+- **Response Sukses (200 OK):**
+  ```json
+  {
+      "message": "Bioskop berhasil dihapus"
+  }
+  ```
+- **Response Error (404 Not Found):**
+  ```json
+  {
+      "error": "Bioskop tidak ditemukan"
   }
   ```

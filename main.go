@@ -28,6 +28,10 @@ func main() {
 
 	bioskopHandler := handlers.NewBioskopHandler(db)
 	router.POST("/bioskop", bioskopHandler.AddBioskop)
+	router.GET("/bioskop", bioskopHandler.GetAll)
+	router.GET("/bioskop/:id", bioskopHandler.GetByID)
+	router.PUT("/bioskop/:id", bioskopHandler.UpdateBioskop)
+	router.DELETE("/bioskop/:id", bioskopHandler.DeleteBioskop)
 
 	fmt.Println("Server berjalan di port 3000...")
 	if err := router.Run(":3000"); err != nil {
