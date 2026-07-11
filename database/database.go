@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"simple-rest-api/config"
+	"simple-rest-api/database/migration"
 
 	_ "github.com/lib/pq"
 )
@@ -24,6 +25,8 @@ func ConnectDB(cfg config.Config) *sql.DB {
 	if err != nil {
 		log.Fatal("Gagal terhubung ke database:", err)
 	}
+
+	migration.DBMigrate(db)
 
 	return db
 }

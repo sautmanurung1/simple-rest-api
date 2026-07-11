@@ -3,22 +3,26 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"simple-rest-api/config"
 	"simple-rest-api/database"
 	"simple-rest-api/handlers"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
 func main() {
+	_ = godotenv.Load()
+
 	dbConf := config.Config{
-		Host:     "localhost",
-		Port:     "5432",
-		User:     "postgres",
-		Password: "password", // Sesuaikan dengan password database Anda
-		DBName:   "bioskop_db",
+		Host:     os.Getenv("PGHOST"),
+		Port:     os.Getenv("PGPORT"),
+		User:     os.Getenv("PGUSER"),
+		Password: os.Getenv("PGPASSWORD"), // Sesuaikan dengan password database Anda
+		DBName:   os.Getenv("PGDATABASE"),
 	}
 
 	db := database.ConnectDB(dbConf)
